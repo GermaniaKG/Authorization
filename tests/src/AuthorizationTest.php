@@ -2,6 +2,8 @@
 namespace tests;
 
 use Germania\Authorization\Authorization;
+use Germania\Authorization\TaskNotFoundException;
+use Interop\Container\Exception\NotFoundException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -24,6 +26,24 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
 
         return $sut;
     }
+
+
+    /**
+     * @depends testInstantiation
+     */
+    public function testInteropContainerInterface( $sut )
+    {
+        $this->assertTrue( $sut->has("/foo") );
+        $this->assertFalse( $sut->has("something-else") );
+
+        $this->assertNotEmpty( $sut->get("/foo"));
+
+        $this->expectException(TaskNotFoundException::class);
+        $this->assertFalse( $sut->get("something-else") );
+    }
+
+
+
 
     /**
      * @depends testInstantiation
