@@ -1,7 +1,9 @@
 <?php
 namespace Germania\Authorization;
 
-interface AuthorizationInterface
+use Interop\Container\ContainerInterface;
+
+interface AuthorizationInterface extends ContainerInterface
 {
 
     /**

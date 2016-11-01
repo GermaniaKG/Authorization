@@ -78,4 +78,28 @@ class Authorization implements AuthorizationInterface
         return $permitted;
     }
 
+
+
+    /**
+     * @param  string $task The task
+     * @return bool
+     */
+    public function has( $task )
+    {
+        return array_key_exists($task, $this->acl);
+    }
+
+    /**
+     * @param  string $task The task
+     * @return array        Allowed roles
+     */
+    public function get( $task )
+    {
+        if ($this->has($task)):
+            return $this->acl[ $task ];
+        endif;
+
+        throw new TaskNotFoundException;
+    }
+
 }
