@@ -1,0 +1,34 @@
+{
+	"name":        "germania-kg/authorization",
+
+	"type":        "library",
+	"license":     "MIT",
+
+	"authors": [
+		{
+			"name":  "Carsten Witt",
+			"email": "carstenwitt@germania-kg.de",
+			"role":  "Developer"
+		}
+	],
+
+	"autoload": {
+			"psr-4": {
+					"Germania\\Authorization\\": "src/"
+			}
+	},
+
+  "autoload-dev": {
+      "psr-4": { "tests\\": "tests/src" }
+  },
+
+	"require": {
+		  "psr/log": "^1.0"
+	},
+
+	"require-dev": {
+		"satooshi/php-coveralls": "^1.0",
+		"phpunit/phpunit": "^5.2"
+	}
+
+}
