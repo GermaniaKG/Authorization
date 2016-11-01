@@ -1,6 +1,7 @@
 #Authorization
 
-**Simple authorization solution with no hierarchical stuff so far.**
+**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility.   
+No hierarchical stuff so far.**
 
 ##Installation
 
@@ -50,6 +51,41 @@ $allowed = $authorization("/bar", $user_roles);
 $allowed = $authorization->authorize("/somethingelse", $user_roles);
 $allowed = $authorization("/somethingelse", $user_roles);
 ```
+
+##Container Interoperability
+
+The *AuthorizationInterface* also extends *[Interop\Container\ContainerInterface](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md)*.
+So you can test if your *Authorization* instance *has* a task and *get* the allowed roles.
+
+If a task is not defined, a *TaskNotFoundException* exception will be thrown. This class implements the *[Interop\Container\Exception\NotFoundException](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md#4-interopcontainerexceptioncontainerexception)* interface.
+
+More information: [container-interop/container-interop](https://github.com/container-interop/container-interop)
+
+
+```php
+<?php
+use Germania\Authorization\TaskNotFoundException;
+use Interop\Container\Exception\NotFoundException;
+
+// Assuming example from above:
+// TRUE
+$has = $authorization->has( "/foo" );
+
+// array( "coworkers", "superuser"] )
+try {
+	$roles = $authorization->get( "/foo" );
+	
+	// will throw TaskNotFoundException
+	$roles = $authorization->get( "/something-else" );
+}
+catch (TaskNotFoundException $e) {
+	if ($e instanceOf NotFoundException) {
+		echo "Interop Container: NotFoundException";
+	}
+}
+```
+
+
 
 
 ##Development and testing
