@@ -40,11 +40,11 @@ class Authorization implements AuthorizationInterface
      * @param bool            $default_permission  Default permission if a task is not found
      * @param LoggerInterface $log                 PSR-3 Logger
      */
-    public function __construct( array $acl, $default_permission, LoggerInterface $log = null)
+    public function __construct( array $acl, $default_permission, LoggerInterface $logger = null)
     {
         $this->acl = $acl;
         $this->default_permission = $default_permission;
-        $this->log = $log ?: new NullLogger;
+        $this->log = $logger ?: new NullLogger;
     }
 
 
@@ -53,9 +53,9 @@ class Authorization implements AuthorizationInterface
      * @param  array  $user_roles
      * @return bool
      */
-    public function __invoke( $task, array $user_roles)
+    public function __invoke( $task, array $user_roles, LoggerInterface $logger = null)
     {
-        return $this->authorize( $task, $user_roles);
+        return $this->authorize( $task, $user_roles, $logger);
     }
 
 
@@ -64,15 +64,17 @@ class Authorization implements AuthorizationInterface
      * @param  array  $user_roles
      * @return bool
      */
-    public function authorize( $task, array $user_roles )
+    public function authorize( $task, array $user_roles, LoggerInterface $logger = null )
     {
         $permitted = (!isset( $this->acl[ $task ]))
         ? $this->default_permission
         : (count(array_intersect( $user_roles, $this->acl[$task])) > 0);
 
-        $this->log->info("Authorize $task", [
+        $log = $logger ?: $this->log;
+
+        $log->info("Authorize $task", [
             'user_roles' => implode(",", $user_roles),
-            'permitted'  => $permitted
+            'permitted'  => $permitted ? "YES" : "NO"
         ]);
 
         return $permitted;
