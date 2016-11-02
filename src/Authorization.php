@@ -72,7 +72,7 @@ class Authorization implements AuthorizationInterface
 
         $log = $logger ?: $this->log;
 
-        $log->info("Authorize $task", [
+        $log->info("Authorize '$task'", [
             'user_roles' => implode(",", $user_roles),
             'permitted'  => $permitted ? "YES" : "NO"
         ]);
