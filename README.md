@@ -52,6 +52,16 @@ $allowed = $authorization->authorize("/somethingelse", $user_roles);
 $allowed = $authorization("/somethingelse", $user_roles);
 ```
 
+**Per-task logging:** Both *authorize* and *__invoke* Methods do accept an optional PSR-3 Logger instance. This enables you to disable or override the default logger you passed on instantiation. Example:
+
+```php
+<?php
+$silent_log = new Psr\Log\NullLogger;
+
+$authorization->authorize("/foo", $user_roles, $silent_log);
+$authorization("/foo", $user_roles, $silent_log);
+```
+
 ##Container Interoperability
 
 The *AuthorizationInterface* also extends *[Interop\Container\ContainerInterface](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md)*.
