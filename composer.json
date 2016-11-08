@@ -28,6 +28,7 @@
 	},
 
 	"require-dev": {
+		"slim/slim": "^3.0",
 		"satooshi/php-coveralls": "^1.0",
 		"phpunit/phpunit": "^5.2"
 	}
