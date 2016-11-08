@@ -1,6 +1,6 @@
 #Authorization
 
-**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility.   
+**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility and PSR-7 style Middleware.   
 No hierarchical stuff so far.**
 
 ##Installation
@@ -144,13 +144,17 @@ $auth = new Authorization( ... );
 // Optionally with PSR-3 Logger
 $middleware = new RouteNameAuthorizationMiddleware( $auth );
 $middleware = new RouteNameAuthorizationMiddleware( $auth, $logger );
+
+// Slim Middelware Example:
+$app = new \Slim\App;
+$app->add( $middleware );
 ```
 
 
 
 
 ###Customizable Authorization
-**AuthorizationMiddleware** is the base class of the two above, and most configurable. It takes *another Callable* returning a custom term (or “permission”, you name it) you like to authorize, next to our Authorization *Callable* from the examples above it takes .
+**AuthorizationMiddleware** is the base class of the two above, and more configurable. It takes *another Callable* returning a custom term (or “permission”, you name it) you like to authorize, next to our Authorization *Callable* from the examples above.
 
 
 
