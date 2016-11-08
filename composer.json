@@ -1,6 +1,8 @@
 {
 	"name":        "germania-kg/authorization",
 
+	"keywords": [ "authorization", "middleware", "callable"],
+
 	"type":        "library",
 	"license":     "MIT",
 
@@ -23,11 +25,13 @@
   },
 
 	"require": {
-		  "psr/log": "^1.0",
-		"container-interop/container-interop": "^1.1"
+			"psr/log": "^1.0",
+			"psr/http-message": "^1.0",
+			"container-interop/container-interop": "^1.1"
 	},
 
 	"require-dev": {
+		"slim/slim": "^3.0",
 		"satooshi/php-coveralls": "^1.0",
 		"phpunit/phpunit": "^5.2"
 	}

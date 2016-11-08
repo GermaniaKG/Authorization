@@ -1,6 +1,6 @@
 #Authorization
 
-**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility.   
+**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility and PSR-7 style Middleware.   
 No hierarchical stuff so far.**
 
 ##Installation
@@ -95,7 +95,85 @@ catch (TaskNotFoundException $e) {
 }
 ```
 
+##PSR 7-style Middleware
 
+This packages offers three PSR7-style middlewares. All take a *Callable* authorizer (e.g. class Authorization, see above) and optionally a PSR-3 Logger.
+
+If authorization fails, the Response object gets a `401 Unauthorized` status; after that, the next middelware will be called. This enables you to work with unauthorized requests in later middlewares or controllers.—Well, this is what basically happens inside:
+
+```php
+// Your Callable passed into constructor
+$authorize = $this->authorizer;
+
+if (!$authorize( $url )):
+    $response = $response->withStatus( 401 );
+endif;
+
+$response = $next($request, $response);
+return $response;
+```
+
+
+###Request URI Authorization
+**RequestUriAuthorizationMiddleware** will check [PSR-7 Request's](http://www.php-fig.org/psr/psr-7/#3-2-psr-http-message-requestinterface) URI string; suitable in most cases.
+
+```php
+<?php
+use Germania\Authorization\RequestUriAuthorizationMiddleware;
+
+// Have your Authorization callable at hand
+$auth = new Authorization( ... );
+
+// Optionally with PSR-3 Logger
+$middleware = new RequestUriAuthorizationMiddleware( $auth )
+$middleware = new RequestUriAuthorizationMiddleware( $auth, $logger )
+```
+
+
+
+###Route Name Authorization
+**RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). 
+
+```php
+<?php
+use Germania\Authorization\RouteNameAuthorizationMiddleware;
+
+// Have your Authorization callable at hand
+$auth = new Authorization( ... );
+
+// Optionally with PSR-3 Logger
+$middleware = new RouteNameAuthorizationMiddleware( $auth );
+$middleware = new RouteNameAuthorizationMiddleware( $auth, $logger );
+
+// Slim Middelware Example:
+$app = new \Slim\App;
+$app->add( $middleware );
+```
+
+
+
+
+###Customizable Authorization
+**AuthorizationMiddleware** is the base class of the two above, and more configurable. It takes *another Callable* returning a custom term (or “permission”, you name it) you like to authorize, next to our Authorization *Callable* from the examples above.
+
+
+
+```php
+<?php
+use Germania\Authorization\AuthorizationMiddleware;
+
+// Have your Authorization callable at hand
+$auth = new Authorization( ... );
+
+// Setup Callable for URLs (or, permissions, you name it)
+$url_getter = function( $request ) {
+    return (string) $request->getUri();
+};
+
+// Optionally with PSR-3 Logger
+$middleware = new AuthorizationMiddleware( $auth, $url_getter );
+$middleware = new AuthorizationMiddleware( $auth, $url_getter, $logger );
+```
 
 
 ##Development and testing
