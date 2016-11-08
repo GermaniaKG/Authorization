@@ -1,6 +1,8 @@
 {
 	"name":        "germania-kg/authorization",
 
+	"keywords": [ "authorization", "middleware", "callable"],
+
 	"type":        "library",
 	"license":     "MIT",
 
