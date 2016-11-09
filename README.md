@@ -132,7 +132,8 @@ $middleware = new RequestUriAuthorizationMiddleware( $auth, $logger )
 
 
 ###Route Name Authorization
-**RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). 
+**RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). To get access to current route name, set *determineRouteBeforeAppMiddleware* in Slim's configuration settings to *true*.
+
 
 ```php
 <?php
@@ -145,8 +146,15 @@ $auth = new Authorization( ... );
 $middleware = new RouteNameAuthorizationMiddleware( $auth );
 $middleware = new RouteNameAuthorizationMiddleware( $auth, $logger );
 
-// Slim Middelware Example:
-$app = new \Slim\App;
+// Setup Slim App:
+$app = new \Slim\App( [
+    'settings' => [
+        // Set this to true to get access to route within middleware
+        'determineRouteBeforeAppMiddleware' => true
+    ]
+]);
+
+// Add Middleware
 $app->add( $middleware );
 ```
 
