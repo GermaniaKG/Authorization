@@ -80,11 +80,14 @@ class AuthorizationMiddleware
                 'url'  => $url,
                 'status' => $this->unauthorized_status_code
             ]);
+
+            // Set "401 Unauthorized" Header to response
             $response = $response->withStatus( $this->unauthorized_status_code );
         else:
             $this->logger->info("Before Route: Authorization successful", [
                 'url'  => $url
             ]);
+            // Do nothing else here
         endif;
 
 

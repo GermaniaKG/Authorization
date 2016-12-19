@@ -1,5 +1,10 @@
 #Authorization
 
+[![Build Status](https://travis-ci.org/GermaniaKG/Authorization.svg?branch=master)](https://travis-ci.org/GermaniaKG/Authorization)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
+
+
 **Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility and PSR-7 style Middleware.   
 No hierarchical stuff so far.**
 
@@ -132,7 +137,8 @@ $middleware = new RequestUriAuthorizationMiddleware( $auth, $logger )
 
 
 ###Route Name Authorization
-**RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). 
+**RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). To get access to current route name, set *determineRouteBeforeAppMiddleware* in Slim's configuration settings to *true*.
+
 
 ```php
 <?php
@@ -145,8 +151,15 @@ $auth = new Authorization( ... );
 $middleware = new RouteNameAuthorizationMiddleware( $auth );
 $middleware = new RouteNameAuthorizationMiddleware( $auth, $logger );
 
-// Slim Middelware Example:
-$app = new \Slim\App;
+// Setup Slim App:
+$app = new \Slim\App( [
+    'settings' => [
+        // Set this to true to get access to route within middleware
+        'determineRouteBeforeAppMiddleware' => true
+    ]
+]);
+
+// Add Middleware
 $app->add( $middleware );
 ```
 
