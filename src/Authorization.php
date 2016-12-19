@@ -30,7 +30,7 @@ class Authorization implements AuthorizationInterface
     public $default_permission;
 
     /**
-     * @var Psr\Log\LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     public $log;
 
@@ -38,7 +38,7 @@ class Authorization implements AuthorizationInterface
     /**
      * @param array           $acl                 Array with tasks and allowed roles
      * @param bool            $default_permission  Default permission if a task is not found
-     * @param LoggerInterface $log                 PSR-3 Logger
+     * @param LoggerInterface $logger              PSR-3 Logger
      */
     public function __construct( array $acl, $default_permission, LoggerInterface $logger = null)
     {
