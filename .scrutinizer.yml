@@ -8,7 +8,7 @@ build:
             -
                 command: 'phpunit --coverage-clover=some-file'
                 coverage:
-                    # file: 'logs/clover.xml'
+                    file: 'logs/clover.xml'
                     format: 'clover'
 checks:
     php:
