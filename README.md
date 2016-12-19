@@ -1,5 +1,10 @@
 #Authorization
 
+[![Build Status](https://travis-ci.org/GermaniaKG/Authorization.svg?branch=master)](https://travis-ci.org/GermaniaKG/Authorization)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
+
+
 **Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility and PSR-7 style Middleware.   
 No hierarchical stuff so far.**
 
