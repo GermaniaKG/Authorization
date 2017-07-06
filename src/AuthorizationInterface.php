@@ -1,9 +1,10 @@
 <?php
 namespace Germania\Authorization;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
+use Interop\Container\ContainerInterface as InteropContainerInterface;
 
-interface AuthorizationInterface extends ContainerInterface
+interface AuthorizationInterface extends ContainerInterface, InteropContainerInterface
 {
 
     /**
