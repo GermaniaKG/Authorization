@@ -25,7 +25,7 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf( ContainerInterface::class, $sut );
         $this->assertInstanceOf( InteropContainerInterface::class, $sut );
-        $this->assertInstanceOf( "Psr\Log\LoggerInterface", $sut->log );
+        $this->assertInstanceOf( LoggerInterface::class, $sut->log );
         $this->assertInternalType( "array", $sut->acl );
 
         return $sut;
