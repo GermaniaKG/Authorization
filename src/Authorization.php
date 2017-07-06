@@ -60,6 +60,8 @@ class Authorization implements AuthorizationInterface
 
 
     /**
+     * Checks if the task is permitted for the given (user) roles.
+     *
      * @param  string $task
      * @param  array  $user_roles
      * @return bool
@@ -83,6 +85,8 @@ class Authorization implements AuthorizationInterface
 
 
     /**
+     * Checks if a task is contained within the ACL.
+     *
      * @param  string $task The task
      * @return bool
      */
@@ -91,7 +95,11 @@ class Authorization implements AuthorizationInterface
         return array_key_exists($task, $this->acl);
     }
 
+
     /**
+     * Returns the roles that are associated with the given task,
+     * or, in other words: the ACL for the given task.
+     *
      * @param  string $task The task
      * @return array        Allowed roles
      */

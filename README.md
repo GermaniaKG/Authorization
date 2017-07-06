@@ -72,7 +72,7 @@ $authorization("/foo", $user_roles, $silent_log);
 The *AuthorizationInterface* implements both [PSR-11 ContainerInterface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) and the deprecated *[Interop\Container\ContainerInterface](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md)* for backward compatibility.
 So you can test if your *Authorization* instance *has* a task and *get* the allowed roles.
 
-If a task is not defined, a *TaskNotFoundException* exception will be thrown. This class implements the *[Interop\Container\Exception\NotFoundException](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md#4-interopcontainerexceptioncontainerexception)* interface.
+If a task is not defined, a *TaskNotFoundException* exception will be thrown. This class implements both the *[Interop\Container\Exception\NotFoundException](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md#4-interopcontainerexceptioncontainerexception)* and PSR-11's [Psr\Container\NotFoundExceptionInterface](https://github.com/php-fig/container/blob/master/src/NotFoundExceptionInterface.php) interface.
 
 More information: [PSR-11 Container](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) • [container-interop/container-interop](https://github.com/container-interop/container-interop)
 
@@ -80,7 +80,7 @@ More information: [PSR-11 Container](https://github.com/php-fig/fig-standards/bl
 ```php
 <?php
 use Germania\Authorization\TaskNotFoundException;
-use Interop\Container\Exception\NotFoundException;
+use Psr\Container\NotFoundExceptionInterface;
 
 // Assuming example from above:
 // TRUE
@@ -93,7 +93,7 @@ try {
 	// will throw TaskNotFoundException
 	$roles = $authorization->get( "/something-else" );
 }
-catch (TaskNotFoundException $e) {
+catch (NotFoundExceptionInterface $e) {
 	if ($e instanceOf NotFoundException) {
 		echo "Interop Container: NotFoundException";
 	}
