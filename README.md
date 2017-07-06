@@ -5,7 +5,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
 
 
-**Simple authorization solution with [container-interop](https://github.com/container-interop/container-interop) compatibility and PSR-7 style Middleware.   
+**Simple authorization solution with [PSR-11 Container](https://github.com/php-fig/container) compatibility and PSR-7 style Middleware.
 No hierarchical stuff so far.**
 
 ##Installation
