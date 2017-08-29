@@ -1,4 +1,4 @@
-#Authorization
+# Authorization
 
 [![Build Status](https://travis-ci.org/GermaniaKG/Authorization.svg?branch=master)](https://travis-ci.org/GermaniaKG/Authorization)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
@@ -8,14 +8,14 @@
 **Simple authorization solution with [PSR-11 Container](https://github.com/php-fig/container) compatibility and PSR-7 style Middleware.
 No hierarchical stuff so far.**
 
-##Installation
+## Installation
 
 ```bash
 $ composer require germania-kg/authorization
 ```
 
 
-##Setup
+## Setup
 
 The *Authorization* constructor requires an Access Control List, i.e. an array with *tasks* as keys and *allowed roles arrays* as elements. The second parameter defines whether to permit in case a task is not defined.
 
@@ -25,8 +25,8 @@ use Germania\Authorization\Authorization;
 
 // Define tasks and allowed roles
 $acl = array(
-    '/foo' => [ "coworkers", "superuser"],
-    '/bar' => [ "superuser", "registered"]
+	'/foo' => [ "coworkers", "superuser"],
+	'/bar' => [ "superuser", "registered"]
 );
 
 // Wether to permit undefined tasks
@@ -37,7 +37,7 @@ $authorization = new Authorization( $acl, $default_permission );
 $authorization = new Authorization( $acl, $default_permission, $logger );
 ```
 
-##Usage
+## Usage
 The *Authorization* class implements the *AuthorizationInterface* which defines a single *authorize* method. Additionally, *Authorization* provides a *__invoke* function und thus is callable.
 
 ```php
@@ -67,7 +67,7 @@ $authorization->authorize("/foo", $user_roles, $silent_log);
 $authorization("/foo", $user_roles, $silent_log);
 ```
 
-##Container Interoperability
+## Container Interoperability
 
 The *AuthorizationInterface* implements both [PSR-11 ContainerInterface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) and the deprecated *[Interop\Container\ContainerInterface](https://github.com/container-interop/container-interop/blob/master/docs/ContainerInterface.md)* for backward compatibility.
 So you can test if your *Authorization* instance *has* a task and *get* the allowed roles.
@@ -100,7 +100,7 @@ catch (NotFoundExceptionInterface $e) {
 }
 ```
 
-##PSR 7-style Middleware
+## PSR 7-style Middleware
 
 This packages offers three PSR7-style middlewares. All take a *Callable* authorizer (e.g. class Authorization, see above) and optionally a PSR-3 Logger.
 
@@ -111,7 +111,7 @@ If authorization fails, the Response object gets a `401 Unauthorized` status; af
 $authorize = $this->authorizer;
 
 if (!$authorize( $url )):
-    $response = $response->withStatus( 401 );
+	$response = $response->withStatus( 401 );
 endif;
 
 $response = $next($request, $response);
@@ -119,7 +119,7 @@ return $response;
 ```
 
 
-###Request URI Authorization
+### Request URI Authorization
 **RequestUriAuthorizationMiddleware** will check [PSR-7 Request's](http://www.php-fig.org/psr/psr-7/#3-2-psr-http-message-requestinterface) URI string; suitable in most cases.
 
 ```php
@@ -136,7 +136,7 @@ $middleware = new RequestUriAuthorizationMiddleware( $auth, $logger )
 
 
 
-###Route Name Authorization
+### Route Name Authorization
 **RouteNameAuthorizationMiddleware** is for those working with [Slim Framework's Route Names](http://www.slimframework.com/docs/objects/router.html#route-names). To get access to current route name, set *determineRouteBeforeAppMiddleware* in Slim's configuration settings to *true*.
 
 
@@ -153,10 +153,10 @@ $middleware = new RouteNameAuthorizationMiddleware( $auth, $logger );
 
 // Setup Slim App:
 $app = new \Slim\App( [
-    'settings' => [
-        // Set this to true to get access to route within middleware
-        'determineRouteBeforeAppMiddleware' => true
-    ]
+	'settings' => [
+		// Set this to true to get access to route within middleware
+		'determineRouteBeforeAppMiddleware' => true
+	]
 ]);
 
 // Add Middleware
@@ -166,7 +166,7 @@ $app->add( $middleware );
 
 
 
-###Customizable Authorization
+### Customizable Authorization
 **AuthorizationMiddleware** is the base class of the two above, and more configurable. It takes *another Callable* returning a custom term (or “permission”, you name it) you like to authorize, next to our Authorization *Callable* from the examples above.
 
 
@@ -180,7 +180,7 @@ $auth = new Authorization( ... );
 
 // Setup Callable for URLs (or, permissions, you name it)
 $url_getter = function( $request ) {
-    return (string) $request->getUri();
+	return (string) $request->getUri();
 };
 
 // Optionally with PSR-3 Logger
@@ -189,7 +189,7 @@ $middleware = new AuthorizationMiddleware( $auth, $url_getter, $logger );
 ```
 
 
-##Development and testing
+## Development and testing
 
 Clone repo, use [Git Flow](https://github.com/nvie/gitflow). Work on *develop* branch.
 
