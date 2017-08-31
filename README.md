@@ -1,12 +1,13 @@
-# Authorization
+# Germania KG · Authorization
+
+**Simple authorization solution with [PSR-11 Container](https://github.com/php-fig/container) compatibility and PSR-7 style Middleware. No hierarchical stuff so far.**
 
 [![Build Status](https://travis-ci.org/GermaniaKG/Authorization.svg?branch=master)](https://travis-ci.org/GermaniaKG/Authorization)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/build-status/master)
 
 
-**Simple authorization solution with [PSR-11 Container](https://github.com/php-fig/container) compatibility and PSR-7 style Middleware.
-No hierarchical stuff so far.**
 
 ## Installation
 
@@ -188,21 +189,26 @@ $middleware = new AuthorizationMiddleware( $auth, $url_getter );
 $middleware = new AuthorizationMiddleware( $auth, $url_getter, $logger );
 ```
 
+## Issues
 
-## Development and testing
+See [issues list.][i0]
 
-Clone repo, use [Git Flow](https://github.com/nvie/gitflow). Work on *develop* branch.
+[i0]: https://github.com/GermaniaKG/Authorization/issues 
+
+
+## Development
 
 ```bash
-# Clone Repo
 $ git clone git@github.com:GermaniaKG/Authorization.git germania-authorization
 $ cd germania-authorization
 $ composer install
 ```
 
-For testing, copy PHPUnit configuration file and customize if needed.
+## Unit tests
+
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is. 
+Run [PhpUnit](https://phpunit.de/) like this:
 
 ```bash
-$ cp phpunit.xml.dist phpunit.xml
-$ phpunit
+$ vendor/bin/phpunit
 ```
