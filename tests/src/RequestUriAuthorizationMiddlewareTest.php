@@ -11,7 +11,7 @@ use Slim\Http\Request;
 /**
  * @coversDefaultClass \Germania\Authorization\Authorization
  */
-class RequestUriAuthorizationMiddlewareTest extends \PHPUnit_Framework_TestCase
+class RequestUriAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

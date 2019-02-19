@@ -2,7 +2,9 @@
 
 **Simple authorization solution with [PSR-11 Container](https://github.com/php-fig/container) compatibility and PSR-7 style Middleware. No hierarchical stuff so far.**
 
-[![Build Status](https://travis-ci.org/GermaniaKG/Authorization.svg?branch=master)](https://travis-ci.org/GermaniaKG/Authorization)
+[![Packagist](https://img.shields.io/packagist/v/germania-kg/authorization.svg?style=flat)](https://packagist.org/packages/germania-kg/authorization)
+[![PHP version](https://img.shields.io/packagist/php-v/germania-kg/authorization.svg)](https://packagist.org/packages/germania-kg/authorization)
+[![Build Status](https://img.shields.io/travis/GermaniaKG/Authorization.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/Authorization)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/build-status/master)
@@ -193,22 +195,22 @@ $middleware = new AuthorizationMiddleware( $auth, $url_getter, $logger );
 
 See [issues list.][i0]
 
-[i0]: https://github.com/GermaniaKG/Authorization/issues 
-
+[i0]: https://github.com/GermaniaKG/Authorization/issues
 
 ## Development
 
 ```bash
-$ git clone git@github.com:GermaniaKG/Authorization.git germania-authorization
-$ cd germania-authorization
+$ git clone https://github.com/GermaniaKG/Authorization.git
+$ cd Authorization
 $ composer install
 ```
 
 ## Unit tests
 
-Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is. 
-Run [PhpUnit](https://phpunit.de/) like this:
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is. Run [PhpUnit](https://phpunit.de/) test or composer scripts like this:
 
 ```bash
+$ composer test
+# or
 $ vendor/bin/phpunit
 ```
