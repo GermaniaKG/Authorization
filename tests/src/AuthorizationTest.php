@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 /**
  * @coversDefaultClass \Germania\Authorization\Authorization
  */
-class AuthorizationTest extends \PHPUnit_Framework_TestCase
+class AuthorizationTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testInstantiation()

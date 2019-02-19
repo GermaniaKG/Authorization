@@ -12,7 +12,7 @@ use Slim\Route;
 /**
  * @coversDefaultClass \Germania\Authorization\Authorization
  */
-class RouteNameAuthorizationMiddlewareTest extends \PHPUnit_Framework_TestCase
+class RouteNameAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
