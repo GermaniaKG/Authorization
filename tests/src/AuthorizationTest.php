@@ -3,8 +3,6 @@ namespace tests;
 
 use Germania\Authorization\Authorization;
 use Germania\Authorization\TaskNotFoundException;
-use Interop\Container\Exception\NotFoundException;
-use Interop\Container\ContainerInterface as InteropContainerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
@@ -25,9 +23,8 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
         ), $default_permission);
 
         $this->assertInstanceOf( ContainerInterface::class, $sut );
-        $this->assertInstanceOf( InteropContainerInterface::class, $sut );
         $this->assertInstanceOf( LoggerInterface::class, $sut->log );
-        $this->assertInternalType( "array", $sut->acl );
+        $this->assertIsArray( $sut->acl );
 
         return $sut;
     }

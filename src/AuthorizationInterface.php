@@ -2,9 +2,8 @@
 namespace Germania\Authorization;
 
 use Psr\Container\ContainerInterface;
-use Interop\Container\ContainerInterface as InteropContainerInterface;
 
-interface AuthorizationInterface extends ContainerInterface, InteropContainerInterface
+interface AuthorizationInterface extends ContainerInterface
 {
 
     /**
