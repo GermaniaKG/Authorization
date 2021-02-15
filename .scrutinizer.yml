@@ -1,48 +1,40 @@
+
 # .scrutinizer.yml
 
 build:
 
-    dependencies:
-        before:
-            - rm composer.lock
+  dependencies:
+    before:
+      - rm composer.lock
 
-    tests:
-        override:
-            -
-                command: 'vendor/bin/phpunit --coverage-clover=coverage'
-                coverage:
-                    file: 'coverage'
-                    format: 'php-clover'
+  tests:
+    override:
+      -
+        command: 'phpdbg -qrr vendor/bin/phpunit --coverage-clover tests/build/clover.xml'
+        coverage:
+          file: 'tests/build/clover.xml'
+          format: 'clover'
 
-    nodes:
+  nodes:
 
-        php56:
-            environment:
-                php: 5.6
+    php73:
+      environment:
+        php: 7.3
 
-        php70:
-            environment:
-                php: 7.0
+    php74:
+      environment:
+        php: 7.4
 
-        php71:
-            environment:
-                php: 7.1
-
-        php72:
-            environment:
-                php: 7.2
-
-        php73:
-            environment:
-                php: 7.3
+    php80:
+      environment:
+        php: 8.0
 
 
 checks:
-    php:
-        code_rating: true
-        duplication: true
+  php: true
+
 
 filter:
-    excluded_paths:
-        - tests/*
+  excluded_paths:
+    - tests/*
 
