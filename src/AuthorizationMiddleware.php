@@ -5,12 +5,15 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
+
 
 /**
  * This Middleware sets Response's Status Code to "401 Unauthorized"
  * if the passed authorizer callable returns FALSE.
  */
-class AuthorizationMiddleware
+class AuthorizationMiddleware implements MiddlewareInterface
 {
     /**
      * @var Callable
@@ -46,6 +49,61 @@ class AuthorizationMiddleware
         $this->get_url      = $get_url;
         $this->logger       = $logger ?: new NullLogger;
     }
+
+
+
+
+    public function process(Request $request, RequestHandlerInterface $handler) : Response
+    {
+        $get_url = $this->get_url;
+        if (!$url = $get_url( $request )):
+            $this->logger->notice("Route name not available, work with empty value?!");
+        endif;
+
+
+        // ---------------------------------------
+        // 1. Authorization:
+        //    If authorizer() is TRUE, user is allowed.
+        // ---------------------------------------
+        $authorize  = $this->authorizer;
+        $authorized = $authorize($url);
+
+
+        // ---------------------------------------
+        // 2. If Authentication required,
+        //    set "401 Unauthorized" Header to response
+        // ---------------------------------------
+        if (!$authorized):
+            $this->logger->info("Before Route: Not authorized; set Status Code ", [
+                'url'  => $url,
+                'status' => $this->unauthorized_status_code
+            ]);
+
+            // Set "401 Unauthorized" Header to response
+            $response = (new \Nyholm\Psr7\Factory\Psr17Factory)->createResponse($this->unauthorized_status_code);
+            return $response;
+        else:
+            $this->logger->info("Before Route: Authorization successful", [
+                'url'  => $url
+            ]);
+            // Do nothing else here
+        endif;
+
+
+        // ---------------------------------------
+        // 3. Call next middleware
+        // ---------------------------------------
+        $response = $handler->handle($request);
+
+        $this->logger->debug("After Route: noop");
+
+        // ---------------------------------------
+        // 4. Finish
+        // ---------------------------------------
+        return $response;
+    }
+
+
 
 
     /**

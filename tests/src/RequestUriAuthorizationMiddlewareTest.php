@@ -17,7 +17,7 @@ class RequestUriAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider provideData
      */
-    public function testInstantiation( $auth_result, $expected_status_code)
+    public function testInstantiation( $auth_result, $expected_status_code) : RequestUriAuthorizationMiddleware
     {
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
@@ -45,7 +45,7 @@ class RequestUriAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function provideData()
+    public function provideData() : array
     {
         return array(
             [ false, 401],

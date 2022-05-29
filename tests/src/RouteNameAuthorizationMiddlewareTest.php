@@ -18,7 +18,7 @@ class RouteNameAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider provideData
      */
-    public function testInstantiation( $auth_result, $expected_status_code, $use_route_mock, $mock_route_name)
+    public function testInstantiation( $auth_result, $expected_status_code, $use_route_mock, $mock_route_name) : RouteNameAuthorizationMiddleware
     {
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
@@ -62,7 +62,7 @@ class RouteNameAuthorizationMiddlewareTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function provideData()
+    public function provideData() : array
     {
 
 

@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 class AuthorizationTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function testInstantiation()
+    public function testInstantiation() : Authorization
     {
         $default_permission = true;
 
@@ -33,7 +33,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
     /**
      * @depends testInstantiation
      */
-    public function testInteropContainerInterface( $sut )
+    public function testInteropContainerInterface( $sut ) : void
     {
         $this->assertTrue( $sut->has("/foo") );
         $this->assertFalse( $sut->has("something-else") );
@@ -51,7 +51,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
     /**
      * @depends testInstantiation
      */
-    public function testInvokation( $sut )
+    public function testInvokation( $sut ) : void
     {
         $p1 = $sut->__invoke("/foo", array("superuser"));
         $this->assertTrue( $p1 );
@@ -64,7 +64,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
     /**
      * @depends testInstantiation
      */
-    public function testAuthorizeMethod( $sut )
+    public function testAuthorizeMethod( $sut ) : void
     {
         $roles = [ 'admin', 'somegroup' ];
 
@@ -82,7 +82,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider provideNumericAcl
      */
-    public function testNumericPermissions( $acl, $roles, $default_permission)
+    public function testNumericPermissions( $acl, $roles, $default_permission) : void
     {
 
         $sut = new Authorization($acl, $default_permission);
@@ -96,7 +96,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider provideDefaultValuesWithDefaultPermission
      */
-    public function testDefaultPermissions( $acl, $roles, $default_permission)
+    public function testDefaultPermissions( $acl, $roles, $default_permission) : void
     {
 
         $sut = new Authorization($acl, $default_permission);
@@ -109,7 +109,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
 
 
 
-    public function provideNumericAcl()
+    public function provideNumericAcl() : array
     {
         $acl = array(
             '/foo' => [ 3, 2],
@@ -123,7 +123,7 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function provideDefaultValuesWithDefaultPermission()
+    public function provideDefaultValuesWithDefaultPermission() : array
     {
         $acl = array(
             '/foo' => [ "admin",     "superuser"],
