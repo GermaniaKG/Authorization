@@ -4,11 +4,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/germania-kg/authorization.svg?style=flat)](https://packagist.org/packages/germania-kg/authorization)
 [![PHP version](https://img.shields.io/packagist/php-v/germania-kg/authorization.svg)](https://packagist.org/packages/germania-kg/authorization)
-[![Build Status](https://img.shields.io/travis/GermaniaKG/Authorization.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/Authorization)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/Authorization/build-status/master)
-
+[![Tests](https://github.com/GermaniaKG/Authorization/actions/workflows/tests.yml/badge.svg)](https://github.com/GermaniaKG/Authorization/actions/workflows/tests.yml)
 
 
 ## Installation

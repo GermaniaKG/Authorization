@@ -1,0 +1,9 @@
+# phpstan.dist.neon
+
+# Default config file for use in repo.
+# Create a custom phpstan.neon to override settings
+
+parameters:
+    level: 2
+    paths:
+        - src
